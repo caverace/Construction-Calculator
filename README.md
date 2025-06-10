@@ -1,2 +1,5 @@
 # Construction Calculator
-A web solution for calculating prices and measuring in hands on jobs.
+
+A tool for simplifying measurement and pricing workflows in hands on jobs.
+
+Vite + React

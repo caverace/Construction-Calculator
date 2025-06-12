@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { BrickWall, Ruler } from "lucide-react";
 import "./globals.css";
-import { Button } from "@/components/ui/button";
+import HelloWorld from "./pages/HelloWorld";
+import { SideBar, SideButton } from "@/components/Sidebar";
 
 function App() {
-    const [count, setCount] = useState(0);
-
     return (
-        <div className="w-full flex flex-col gap-2 justify-center items-center h-[100vh]">
-            <h1 className="text-3xl font-bold">Hello world 🦈</h1>
-            <Button onClick={() => setCount(count + 1)}>Count: {count}</Button>
+        <div className="flex h-full">
+            <SideBar>
+                <SideButton>
+                    <Ruler />
+                </SideButton>
+                <SideButton>
+                    <BrickWall />
+                </SideButton>
+            </SideBar>
+            <HelloWorld />
         </div>
     );
 }

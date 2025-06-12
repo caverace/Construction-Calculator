@@ -3,6 +3,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+#root {
+    height: 100vh;
+}
+
 :root {
     /* My stuff */
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;

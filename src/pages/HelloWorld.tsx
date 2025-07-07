@@ -5,7 +5,7 @@ export default function HelloWorld() {
     const [count, setCount] = useState(0);
 
     return (
-        <div className="grow flex flex-col gap-2 items-center justify-center">
+        <div className="grow flex flex-col gap-2 items-center justify-center bg-background">
             <h1 className="text-3xl font-bold">Hello world 🦈</h1>
             <Button onClick={() => setCount(count + 1)}>Count: {count}</Button>
         </div>

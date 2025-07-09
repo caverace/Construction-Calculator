@@ -1,34 +1,58 @@
-import { useState, type MouseEventHandler, type ReactNode } from "react";
+import {
+    type Dispatch,
+    type MouseEventHandler,
+    type ReactNode,
+    type SetStateAction,
+} from "react";
 import { Button } from "@/components/ui/button";
-import { BrickWall, PanelLeftOpen, Ruler } from "lucide-react";
+import { BrickWall, Ruler } from "lucide-react";
+import SignIn from "@/components/SignIn";
 
-function SideBar() {
-    const [ isOpen, setOpen ] = useState<boolean>(false);
+function SideButton({
+    isOpen,
+    children,
+    onClick,
+    title,
+}: {
+    isOpen: boolean;
+    children: ReactNode;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+    title?: string;
+}) {
+    return (
+        <Button
+            variant="outline"
+            className={`size-12 justify-start ${isOpen ? "w-full" : null}`}
+            onClick={onClick}
+        >
+            {children}
+            {isOpen ? title : null}
+        </Button>
+    );
+}
 
-    function SideButton({ children, onClick, title }: { children: ReactNode, onClick?: MouseEventHandler<HTMLButtonElement>, title?: string }) {
-        return (
-            <Button variant="outline" className={`size-12 justify-start ${isOpen ? "w-full" : null}`} onClick={onClick}>
-                {children}
-                {isOpen ? title : null}
-            </Button>
-        );
-    }
+function SideBar({
+    openHooks,
+}: {
+    openHooks: [boolean, Dispatch<SetStateAction<boolean>>];
+}) {
+    const [isOpen] = openHooks;
 
     return (
-        <div className={`${isOpen ? "w-48" : null} border-r p-2 flex flex-col gap-2 bg-background justify-between [&_svg:not([class*='size-'])]:size-6`}>
+        <div
+            className={`${isOpen ? "w-48" : null} bg-background flex flex-col justify-between gap-2 border-r p-2 [&_svg:not([class*='size-'])]:size-6`}
+        >
             <div className="flex flex-col gap-2">
-                <SideButton title="Measurements">
+                <SideButton title="Measurements" isOpen={isOpen}>
                     <Ruler />
                 </SideButton>
-                <SideButton title="Materials">
+                <SideButton title="Materials" isOpen={isOpen}>
                     <BrickWall />
                 </SideButton>
+                <SignIn isOpen={isOpen} />
             </div>
-            <SideButton onClick={() => setOpen(!isOpen)}>
-                <PanelLeftOpen />
-            </SideButton>
         </div>
     );
 }
 
-export default SideBar;
+export { SideBar, SideButton };
